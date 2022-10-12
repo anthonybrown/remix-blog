@@ -1,5 +1,5 @@
 import { json } from '@remix-run/node'
-import { Link, useLoaderData } from '@remix-run/react'
+import { Link, Outlet, useLoaderData } from '@remix-run/react'
 import { getPostListItems } from '~/models/post.server'
 
 export async function loader() {
@@ -31,7 +31,7 @@ export default function AdminRoute() {
           </ul>
         </nav>
         <main className="col-span-4 md:col-span-3">
-          {/* 🐨 your job is to add an Outlet component here */}
+          <Outlet />
         </main>
       </div>
     </div>
