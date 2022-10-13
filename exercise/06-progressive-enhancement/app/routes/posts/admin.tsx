@@ -1,14 +1,14 @@
-import { json } from "@remix-run/node";
-import { Link, Outlet, useLoaderData } from "@remix-run/react";
+import { json } from '@remix-run/node'
+import { Link, Outlet, useLoaderData } from '@remix-run/react'
 
-import { getPostListItems } from "~/models/post.server";
+import { getPostListItems } from '~/models/post.server'
 
 export async function loader() {
-  return json({ posts: await getPostListItems() });
+  return json({ posts: await getPostListItems() })
 }
 
 export default function PostAdmin() {
-  const { posts } = useLoaderData<typeof loader>();
+  const { posts } = useLoaderData<typeof loader>()
   return (
     <div className="mx-auto max-w-4xl">
       <h1 className="my-6 mb-2 border-b-2 text-center text-3xl">Blog Admin</h1>
@@ -17,13 +17,21 @@ export default function PostAdmin() {
           <ul>
             {posts.map((post) => (
               <li key={post.slug}>
-                <Link to={post.slug} className="text-blue-600 underline">
+                <Link
+                  to={post.slug}
+                  prefetch="intent"
+                  className="text-blue-600 underline"
+                >
                   {post.title}
                 </Link>
               </li>
             ))}
             <li>
-              <Link to="new" className="text-blue-600 underline">
+              <Link
+                to="new"
+                prefetch="intent"
+                className="text-blue-600 underline"
+              >
                 ➕ Create New Post
               </Link>
             </li>
@@ -34,5 +42,5 @@ export default function PostAdmin() {
         </main>
       </div>
     </div>
-  );
+  )
 }
